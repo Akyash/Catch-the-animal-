@@ -1,0 +1,34 @@
+```javascript
+const gameArea = document.getElementById('gameArea');
+const bucket = document.getElementById('bucket');
+let score = 0;
+
+function createAnimal() {
+  const animal = document.createElement('div');
+  animal.classList.add('animal');
+  animal.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
+  gameArea.appendChild(animal);
+
+  animal.addEventListener('click', () => {
+    if (!animal.classList.contains('collected')) {
+      animal.classList.add('collected');
+      score++;
+      console.log('Score: ' + score);
+    } else {
+      endGame();
+    }
+  });
+
+  setTimeout(() => {
+    animal.remove();
+    createAnimal();
+  }, 2000);
+}
+
+function endGame() {
+  alert('Game over! You collected the same animal twice.');
+  score = 0;
+}
+
+createAnimal();
+```
